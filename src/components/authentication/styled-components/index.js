@@ -9,7 +9,8 @@ export const Form = styled.form`
   margin: 50px auto;
   padding: 20px;
   background: #85c1e9;
-  border: 5px solid #2980b9;
+  background: #fafafa;
+  border: 3px solid #2980b9;
 `;
 export const Header = styled.h2`
   padding: 10px 0;
@@ -26,7 +27,7 @@ export const Input = styled.input`
   width: 100%;
   padding: 10px;
   border: none;
-  box-shadow: 0 3px 10px rgb(0, 0, 0, 0.2);
+  box-shadow: 0 1px 5px rgb(0, 0, 0, 0.2);
   transition: all 0.2s;
   &::placeholder {
     font-size: 0.5;
@@ -51,7 +52,7 @@ export const Button = styled.button`
   background: #2980b9;
   font-weight: 500;
   border: none;
-  box-shadow: 0 2px 10px rgb(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgb(0, 0, 0, 0.2);
   cursor: pointer;
   color: #fff;
   transition: opacity 0.3s;

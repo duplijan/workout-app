@@ -1,15 +1,15 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled, {keyframes} from "styled-components";
 import moment from "moment";
-import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
-import { Redirect } from "react-router-dom";
+import {connect} from "react-redux";
+import {firestoreConnect} from "react-redux-firebase";
+import {compose} from "redux";
+import {Redirect} from "react-router-dom";
 import posed from "react-pose";
 
 import yogaIcon from "../../assets/images/icon.png";
-import { TypeIcon, TypeIconYoga, FavouriteIcon } from "./WorkoutSummary";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {TypeIcon, TypeIconYoga, StarIcon} from "./WorkoutSummary";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
   faHeartbeat,
   faDumbbell,
@@ -18,17 +18,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 const PosedContainer = posed.div({
-  enter: { staggerChildren: 50 },
-  exit: { staggerChildren: 20, staggerDirection: 1 }
+  enter: {staggerChildren: 50},
+  exit: {staggerChildren: 20, staggerDirection: 1}
 });
 
 const PosedItem = posed.div({
-  enter: { y: 0, opacity: 1 },
-  exit: { y: 50, opacity: 0 }
+  enter: {y: 0, opacity: 1},
+  exit: {y: 50, opacity: 0}
 });
 
 const WorkoutDetail = props => {
-  const { workout, auth } = props;
+  const {workout, auth} = props;
   // const {
   //   authorFirstName,
   //   authorLastName,
@@ -40,9 +40,13 @@ const WorkoutDetail = props => {
   if (!auth.uid) return <Redirect to="/signIn" />;
   if (workout) {
     return (
-      <Container key={workout.title}>
+      <Container key={workout.id}>
         <Title>{workout.title} </Title>
-        <FavouriteIcon icon={faStar} style={{ top: "10%" }} />
+        {workout.favourite === true ? (
+          <StarIcon icon={faStar} style={{color: "orange"}} />
+        ) : (
+          <StarIcon icon={faStar} style={{color: "#eee"}} />
+        )}
 
         <Note>{workout.note}</Note>
         <Headline>exercises</Headline>
@@ -51,10 +55,8 @@ const WorkoutDetail = props => {
             <List>
               {workout.exercises.map((exercise, index) => {
                 return (
-                  <PosedItem style={{ styleList: "none" }}>
-                    <Item key={index} onClick={() => {}}>
-                      {exercise}
-                    </Item>
+                  <PosedItem style={{styleList: "none"}}>
+                    <Item key={index}>{exercise}</Item>
                   </PosedItem>
                 );
               })}
@@ -63,11 +65,11 @@ const WorkoutDetail = props => {
 
           <Type>
             {workout.type === "cardio" ? (
-              <TypeIcon icon={faHeartbeat} style={{ color: "#FF2048" }} />
+              <TypeIcon icon={faHeartbeat} style={{color: "#FF2048"}} />
             ) : workout.type === "stretching" ? (
               <TypeIconYoga src={yogaIcon} />
             ) : workout.type === "strength & condition" ? (
-              <TypeIcon icon={faDumbbell} style={{ color: "#323232" }} />
+              <TypeIcon icon={faDumbbell} style={{color: "#323232"}} />
             ) : null}
             <p>{workout.type}</p>
           </Type>
@@ -129,7 +131,7 @@ const Title = styled.h1`
   text-align: center
   text-transform: uppercase;
   color: #2980b9;
-  border-bottom: 1px solid #2980b9;
+  border-bottom: 2px solid #2980b9;
   padding: 10px 0;
 `;
 const Note = styled.p`

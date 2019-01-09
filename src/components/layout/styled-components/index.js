@@ -8,8 +8,7 @@ export const Menu = styled.ul`
 export const MenuItem = styled.li`
   margin: 0 10px;
   display: inline-block;
-  padding: 8px 15px;
-  font-size: 1.2em;
+  padding: 5px 10px;
   border: 2px solid #f8f9f9;
   transition: all 0.2s;
   &:hover {

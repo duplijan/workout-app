@@ -1,14 +1,14 @@
 export const FETCH_WORKOUT = "CREATE_WORKOUT";
 export const FETCH_WORKOUT_ERROR = "CREATE_WORKOUT_ERROR";
 export const DELETE_WORKOUT = "DELETE_WORKOUT";
-export const SET_FAVOURITE = "SET_FAVOURITE";
+export const TOGGLE_STAR = "SET_FAVOURITE";
 
 export const actions = {
   createWorkout(workout) {
     //extra argumnet from thunk.withExtraArgument({ getFirebase, getFirestore } in idnex.js
     //passed inside the function as a third argument
     //async call to get data from database
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
       //collection name from firestore database
       const firestore = getFirestore();
       //profile data from firebaseAuth reducer
@@ -39,7 +39,7 @@ export const actions = {
   },
 
   deleteWorkout(id) {
-    return (dispatch, getState, { getFirebase, getFirestore }) => {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
       const firestore = getFirestore();
       firestore
         .collection("workouts")
@@ -52,23 +52,25 @@ export const actions = {
           });
         });
     };
-  }
+  },
 
-  // setFavourite(id) {
-  //   return (dispatch, getState, { getFirebase, getFirestore }) => {
-  //     const firestore = getFirestore();
-  //     firestore
-  //       .collection("workouts")
-  //       .doc(id)
-  //       .set({
-  //         ...id,
-  //         favourite: true
-  //       })
-  //       .then(() => {
-  //         dispatch({
-  //           type: SET_FAVOURITE
-  //         });
-  //       });
-  //   };
-  //}
+  toggleStar(id) {
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+      const firestore = getFirestore();
+      const workout = getState().firestore.ordered.workouts.filter(
+        workout => workout.id === id
+      );
+      firestore
+        .collection("workouts")
+        .doc(id)
+        .update({
+          favourite: !workout[0].favourite
+        })
+        .then(() => {
+          dispatch({
+            type: TOGGLE_STAR
+          });
+        });
+    };
+  }
 };

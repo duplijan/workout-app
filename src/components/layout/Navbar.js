@@ -1,15 +1,15 @@
 import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 
 import SignedInLink from "./SignedInLink";
 import SignedOutLink from "./SignedOutLink";
 
 //<SignedOutLink />
-const Navbar = ({ auth, profile }) => {
+const Navbar = ({auth, profile}) => {
   //user id from firebase
-  const { uid } = auth;
+  const {uid} = auth;
   return (
     <Container>
       <Center>
@@ -25,7 +25,6 @@ const Navbar = ({ auth, profile }) => {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     auth: state.firebaseAuth.auth,
     profile: state.firebaseAuth.profile

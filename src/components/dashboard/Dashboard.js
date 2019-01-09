@@ -1,18 +1,18 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 
 //HOC to connect Dashboard component with database
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
-import { Redirect } from "react-router-dom";
+import {firestoreConnect} from "react-redux-firebase";
+import {compose} from "redux";
+import {Redirect} from "react-router-dom";
 
 import Notification from "./Notification";
 import WorkoutList from "../workouts/WorkoutList";
 
 class Dashboard extends Component {
   render() {
-    const { workouts, auth, notifications } = this.props;
+    const {workouts, auth, notifications} = this.props;
     if (!auth.uid) return <Redirect to="/welcome" />;
     return (
       <Container>
@@ -49,8 +49,8 @@ const mapStateToProps = state => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: "workouts", orderBy: ["createdAt", "desc"] },
-    { collection: "notifications", limit: 5, orderBy: ["time", "desc"] }
+    {collection: "workouts", orderBy: ["createdAt", "desc"]},
+    {collection: "notifications", limit: 5, orderBy: ["time", "desc"]}
   ])
 )(Dashboard);
 
@@ -62,7 +62,7 @@ const Container = styled.div`
 const Grid = styled.div`
   width: 75%;
   background: #fafafa;
-  padding: 20xp;
+  padding: 20px;
   margin: 50px auto;
   height: auto;
   display: grid;

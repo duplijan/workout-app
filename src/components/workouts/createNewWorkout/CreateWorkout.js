@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
-import { actions } from "../../../store/actions/firebaseActions";
-import { Redirect } from "react-router-dom";
+import {connect} from "react-redux";
+import {actions} from "../../../store/actions/firebaseActions";
+import {Redirect} from "react-router-dom";
 
 import ExerciseInput from "./ExerciseInput";
 import AddExercise from "./AddExercise";
@@ -29,7 +29,7 @@ class CreateWorkout extends Component {
   };
 
   handleChange = (e, index) => {
-    const { name, value, type, checked } = e.target;
+    const {name, value, type, checked} = e.target;
     //check if the input type is a checkbox
     type === "checkbox"
       ? this.setState({
@@ -95,7 +95,7 @@ class CreateWorkout extends Component {
   };
 
   render() {
-    const { auth } = this.props;
+    const {auth} = this.props;
     if (!auth.uid) return <Redirect to="/signIn" />;
     return (
       <Container>
@@ -108,6 +108,7 @@ class CreateWorkout extends Component {
               type="text"
               name="title"
               value={this.state.title}
+              maxLength={15}
             />
             {!this.state.title && <Invalid>this field is required</Invalid>}
           </InputField>
@@ -171,7 +172,6 @@ class CreateWorkout extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     workouts: state.workout.workouts,
     auth: state.firebaseAuth.auth

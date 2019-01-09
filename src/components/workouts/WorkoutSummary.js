@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import moment from "moment";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import posed from "react-pose";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import yogaIcon from "../../assets/images/icon.png";
 import {
   faPlus,
@@ -9,17 +10,33 @@ import {
   faDumbbell,
   faStar
 } from "@fortawesome/free-solid-svg-icons";
-import { StyledLink } from "../layout/Navbar";
+import {StyledLink} from "../layout/Navbar";
 
-const WorkoutSummary = ({ workout, deleteWorkout, setFavourite }) => {
+const PosedContainer = posed.div({
+  enter: {staggerChildren: 50},
+  exit: {staggerChildren: 20, staggerDirection: 1}
+});
+
+const PosedItem = posed.div({
+  enter: {y: 0, opacity: 1},
+  exit: {y: 100, opacity: 0}
+});
+// <PosedContainer >
+//   <PosedItem>
+//   </PosedItem>
+// </PosedContainer>s
+
+const WorkoutSummary = ({workout, deleteWorkout, toggleStar}) => {
   const {
     title,
     type,
     id,
     createdAt,
     authorFirstName,
-    authorLastName
+    authorLastName,
+    favourite
   } = workout;
+
   return (
     <Card>
       <Header>
@@ -35,11 +52,11 @@ const WorkoutSummary = ({ workout, deleteWorkout, setFavourite }) => {
         </DeleteButton>
         <Icon>
           {type === "cardio" ? (
-            <TypeIcon icon={faHeartbeat} style={{ color: "#FF2048" }} />
+            <TypeIcon icon={faHeartbeat} style={{color: "#FF2048"}} />
           ) : type === "stretching" ? (
             <TypeIconYoga src={yogaIcon} />
           ) : type === "strength & condition" ? (
-            <TypeIcon icon={faDumbbell} style={{ color: "#323232" }} />
+            <TypeIcon icon={faDumbbell} style={{color: "#323232"}} />
           ) : null}
         </Icon>
         <Title>
@@ -51,7 +68,19 @@ const WorkoutSummary = ({ workout, deleteWorkout, setFavourite }) => {
         <Date>
           <em>{moment(createdAt.toDate()).calendar()}</em>
         </Date>
-        <FavouriteIcon icon={faStar} />
+        {favourite === true ? (
+          <StarIcon
+            icon={faStar}
+            style={{color: "orange"}}
+            onClick={id => toggleStar(workout.id)}
+          />
+        ) : (
+          <StarIcon
+            icon={faStar}
+            style={{color: "#eee"}}
+            onClick={id => toggleStar(workout.id)}
+          />
+        )}
       </Info>
     </Card>
   );
@@ -59,7 +88,7 @@ const WorkoutSummary = ({ workout, deleteWorkout, setFavourite }) => {
 
 export default WorkoutSummary;
 
-const StyledTitle = styled(StyledLink)`
+export const StyledTitle = styled(StyledLink)`
   font-size: 1.5em;
   transition: all 0.2s;
   color: #2980b9;
@@ -68,7 +97,7 @@ const StyledTitle = styled(StyledLink)`
   }
 `;
 
-const Card = styled.div`
+export const Card = styled.div`
   position: relative;
   width: 80%;
   margin: 20px auto;
@@ -80,7 +109,7 @@ const Card = styled.div`
     box-shadow: 0 8px 6px -6px rgb(0, 0, 0, 0.3);
   }
 `;
-const Header = styled.div`
+export const Header = styled.div`
   width: 100%;
   height: 50%;
   padding: 15px;
@@ -89,29 +118,29 @@ const Header = styled.div`
   align-items: center;
   justify-content: center;
 `;
-const Title = styled.div`
+export const Title = styled.div`
   flex: 2;
   text-align: center;
 `;
-const Icon = styled.div`
+export const Icon = styled.div`
   flex: 1;
 `;
-const Info = styled.div`
+export const Info = styled.div`
   width: 100%;
   background: #3295d3;
   position: relative;
 `;
-const Date = styled.p`
+export const Date = styled.p`
   font-size: 0.6em;
   padding: 10px
   color: #fff;
 `;
-const Author = styled.p`
+export const Author = styled.p`
   font-size: 1em;
   color: #fff;
   padding: 10px;
 `;
-const DeleteButton = styled.div`
+export const DeleteButton = styled.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -130,15 +159,11 @@ export const TypeIconYoga = styled.img.attrs({
   width: 64px;
   height: 64px;
 `;
-export const FavouriteIcon = styled(FontAwesomeIcon)`
+export const StarIcon = styled(FontAwesomeIcon)`
   color: #eee
   font-size: 2em;
   position: absolute;
-  top: 30%;
+  top: 10%;
   right:10px;
-  opacity: 0.5;
-  &:hover {
-    opacity: 1;
-    color: #F1C40F;
-  }
+
 `;

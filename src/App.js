@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import posed, { PoseGroup } from "react-pose";
+import React, {Fragment} from "react";
+import {Route, Switch} from "react-router-dom";
+import posed, {PoseGroup} from "react-pose";
 
 import Navbar from "./components/layout/Navbar";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -9,6 +9,7 @@ import SignIn from "./components/authentication/SignIn";
 import SignUp from "./components/authentication/SignUp";
 import CreateWorkout from "./components/workouts/createNewWorkout/CreateWorkout";
 import WelcomePage from "./components/welcome/WelcomePage";
+import Favourite from "./components/favourite/Favourite";
 
 const RoutesContainer = posed.div({
   enter: {
@@ -17,12 +18,12 @@ const RoutesContainer = posed.div({
     delay: 500,
     beforeChildren: true
   },
-  exit: { y: 10, opacity: 0 }
+  exit: {y: 10, opacity: 0}
 });
 
 const App = props => (
   <Route
-    render={({ location }) => (
+    render={({location}) => (
       <Fragment>
         <Navbar />
         <PoseGroup>
@@ -42,6 +43,7 @@ const App = props => (
               <Route path="/create" component={CreateWorkout} key="welcome" />
               <Route path="/signin" component={SignIn} key="signin" />
               <Route path="/signup" component={SignUp} key="welcome" />
+              <Route path="/favourite" component={Favourite} key="favourite" />
             </Switch>
           </RoutesContainer>
         </PoseGroup>

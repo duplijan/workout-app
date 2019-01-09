@@ -1,37 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
-import { actions } from "../../store/actions/firebaseActions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDumbbell } from "@fortawesome/free-solid-svg-icons";
+import {connect} from "react-redux";
+import {actions} from "../../store/actions/firebaseActions";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faDumbbell} from "@fortawesome/free-solid-svg-icons";
 import WorkoutSummary from "./WorkoutSummary";
-import posed from "react-pose";
 
-const PosedContainer = posed.div({
-  enter: { staggerChildren: 50 },
-  exit: { staggerChildren: 20, staggerDirection: 1 }
-});
-
-const PosedItem = posed.div({
-  enter: { y: 0, opacity: 1 },
-  exit: { y: 100, opacity: 0 }
-});
-
-const WorkoutList = ({ match, workouts, deleteWorkout, user }) => {
+const WorkoutList = ({match, workouts, toggleStar, user, deleteWorkout}) => {
   const workoutList =
     workouts && workouts.length ? (
       workouts.map(workout => {
         return (
-          <PosedContainer>
-            <PosedItem>
-              <WorkoutSummary
-                key={workout.id}
-                workout={workout}
-                user={user}
-                deleteWorkout={deleteWorkout}
-              />
-            </PosedItem>
-          </PosedContainer>
+          <WorkoutSummary
+            key={workout.id}
+            workout={workout}
+            user={user}
+            deleteWorkout={deleteWorkout}
+            toggleStar={toggleStar}
+          />
         );
       })
     ) : (
@@ -44,6 +30,7 @@ const WorkoutList = ({ match, workouts, deleteWorkout, user }) => {
             opacity: 0.3
           }}
         />
+        <p>No workouts created</p>
       </Message>
     );
   return (
@@ -66,11 +53,10 @@ const mapDispatchToProps = dispatch => {
   return {
     deleteWorkout(id) {
       dispatch(actions.deleteWorkout(id));
+    },
+    toggleStar(id) {
+      dispatch(actions.toggleStar(id));
     }
-    // ,
-    // setFavourite(id) {
-    //   dispatch(actions.setFavourite(id));
-    // }
   };
 };
 
@@ -95,4 +81,9 @@ const CardContainer = styled.div`
 const Message = styled.div`
   margin: 50px auto;
   text-align: center;
+  & > p {
+    margin: 10px;
+    font-size: 0.8em;
+    color: #a4d3f2;
+  }
 `;
