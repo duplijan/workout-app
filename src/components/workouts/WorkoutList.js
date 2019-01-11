@@ -74,7 +74,6 @@ const Header = styled.h2`
   width: 80%;
   margin: 0 auto;
 `;
-
 const CardContainer = styled.div`
   min-height: 50vh;
 `;
