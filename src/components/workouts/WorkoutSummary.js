@@ -81,7 +81,6 @@ export const StyledTitle = styled(StyledLink)`
     opacity: 0.8;
   }
 `;
-
 export const Card = styled.div`
   position: relative;
   width: 80%;
