@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import moment from "moment";
-import posed from "react-pose";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import yogaIcon from "../../assets/images/icon.png";
 import {
@@ -11,20 +10,6 @@ import {
   faStar
 } from "@fortawesome/free-solid-svg-icons";
 import {StyledLink} from "../layout/Navbar";
-
-const PosedContainer = posed.div({
-  enter: {staggerChildren: 50},
-  exit: {staggerChildren: 20, staggerDirection: 1}
-});
-
-const PosedItem = posed.div({
-  enter: {y: 0, opacity: 1},
-  exit: {y: 100, opacity: 0}
-});
-// <PosedContainer >
-//   <PosedItem>
-//   </PosedItem>
-// </PosedContainer>s
 
 const WorkoutSummary = ({workout, deleteWorkout, toggleStar}) => {
   const {
