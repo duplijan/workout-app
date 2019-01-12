@@ -53,6 +53,3 @@ const App = props => (
 );
 
 export default App;
-
-//<Router>
-//  </Router>
