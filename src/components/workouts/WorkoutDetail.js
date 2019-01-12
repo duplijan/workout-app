@@ -110,13 +110,6 @@ export default compose(
   connect(mapStateToProps)
 )(WorkoutDetail);
 
-// export default compose(
-//  firestoreConnect(['todos']), // or { collection: 'todos' }
-//  connect((state, props) => ({
-//    todos: state.firestore.ordered.todos
-//  }))
-// )(SomeComponent)
-
 const Container = styled.div`
   width: 70%;
   height: auto;
@@ -126,7 +119,6 @@ const Container = styled.div`
   position: relative;
   box-shadow: 0 2px 10px rgb(0, 0, 0, 0.2);
 `;
-
 const Title = styled.h1`
   text-align: center
   text-transform: uppercase;
@@ -185,7 +177,6 @@ const rotate = keyframes`
 ;
   }
 `;
-
 export const Loader = styled(FontAwesomeIcon)`
   animation: ${rotate} 3s infinite alternate backwards;
 `;
