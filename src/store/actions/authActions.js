@@ -1,9 +1,7 @@
 export const LOGIN_SUCCES = "LOGIN_SUCCES";
 export const LOGIN_ERROR = "LOGIN_ERROR";
-
 export const SIGNOUT_SUCCES = "SIGNOUT_SUCCES";
 export const SIGNOUT_ERROR = "LOSIGNOUT_ERRORGIN_ERROR";
-
 export const SIGNUP_SUCCES = "SIGNUP_SUCCES";
 export const SIGNUP_ERROR = "SIGNUP_ERROR";
 
@@ -24,7 +22,6 @@ export const actions = {
         });
     };
   },
-
   signOut() {
     return (dispatch, getState, { getFirebase }) => {
       const firebase = getFirebase();
@@ -39,8 +36,8 @@ export const actions = {
         });
     };
   },
-  //newUser FirstName, lastName, email, password
   signUp(newUser) {
+     //newUser FirstName, lastName, email, password
     return (dispatch, getState, { getFirebase, getFirestore }) => {
       const firebase = getFirebase();
       const firestore = getFirestore();
