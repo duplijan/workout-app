@@ -3,10 +3,8 @@ import styled from "styled-components";
 import {connect} from "react-redux";
 import {actions} from "../../../store/actions/firebaseActions";
 import {Redirect} from "react-router-dom";
-
 import ExerciseInput from "./ExerciseInput";
 import AddExercise from "./AddExercise";
-
 import {
   Container,
   Form,
@@ -30,7 +28,6 @@ class CreateWorkout extends Component {
 
   handleChange = (e, index) => {
     const {name, value, type, checked} = e.target;
-    //check if the input type is a checkbox
     type === "checkbox"
       ? this.setState({
           [name]: checked
@@ -74,7 +71,6 @@ class CreateWorkout extends Component {
   handleSubmit = e => {
     const workout = this.state;
     e.preventDefault();
-    //check if the field are filled
     if (
       !this.state.title ||
       !this.state.type ||
@@ -133,7 +129,6 @@ class CreateWorkout extends Component {
               />
               strength & condition
             </Label>
-
             <Label htmlFor="type">
               <RadioButton
                 onChange={this.handleChange}
@@ -144,7 +139,6 @@ class CreateWorkout extends Component {
               />
               cardio
             </Label>
-
             <Label htmlFor="type">
               <RadioButton
                 onChange={this.handleChange}
@@ -157,7 +151,6 @@ class CreateWorkout extends Component {
             </Label>
             {!this.state.type && <Invalid>select a type</Invalid>}
           </Options>
-
           <ExerciseInput
             exercises={this.state.exercises}
             onExerciseChange={this.handleExerciseChange}
